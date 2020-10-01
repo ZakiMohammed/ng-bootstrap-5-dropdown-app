@@ -22,7 +22,7 @@
         <!-- items -->
         <div class="dropdown-items">
             <ng-container *ngFor="let item of filterList; let i = index; trackBy: trackByUuid">
-                <div class="dropdown-item" *ngIf="item.visible" (click)='onChange($event, item)'>
+                <div class="dropdown-item" *ngIf="item.visible" (click)='onChange(item)'>
                     {{item.name}}
                 </div>
             </ng-container>
