@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Fruit } from './app.model';
+import { Food } from './app.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
-  getFruits(): Fruit[] {
+
+  getFoods(): Food[] {
     return [
       {
         id: 1,

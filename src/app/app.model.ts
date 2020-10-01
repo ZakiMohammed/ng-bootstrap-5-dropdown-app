@@ -1,4 +1,4 @@
-export interface Fruit {
+export interface Food {
     id: number;
     name: string;
 }

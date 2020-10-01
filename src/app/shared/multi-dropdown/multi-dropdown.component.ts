@@ -1,16 +1,15 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Item } from './dropdown.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Item } from './multi-dropdown.model';
 import { v4 } from 'uuid';
 
 @Component({
-  selector: 'app-dropdown',
-  templateUrl: './dropdown.component.html',
-  styleUrls: ['./dropdown.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-multi-dropdown',
+  templateUrl: './multi-dropdown.component.html',
+  styleUrls: ['./multi-dropdown.component.scss']
 })
-export class DropdownComponent implements OnInit {
+export class MultiDropdownComponent implements OnInit {
 
-  @Input() list: Item[] = [];
+  @Input() items: Item[] = [];
   @Input() placeholder: string;
   @Input() showSearch = true;
   @Input() showAll = true;
@@ -20,7 +19,7 @@ export class DropdownComponent implements OnInit {
 
   filterList: Item[] = [];
   all: Item = {
-    id: 0,
+    id: null,
     name: 'All',
     uuid: v4(),
     checked: false,
@@ -38,11 +37,11 @@ export class DropdownComponent implements OnInit {
 
     const search = this.searchText.toLowerCase();
     if (!search) {
-      this.filterList = [...this.list];
+      this.filterList = [...this.items];
       this.all.visible = true;
       return;
     }
-    this.filterList = this.list.filter(i => i.name.toLowerCase().indexOf(search) !== -1);
+    this.filterList = this.items.filter(i => i.name.toLowerCase().indexOf(search) !== -1);
     if (this.all.name.toLowerCase().indexOf(search) !== -1) {
       this.all.visible = true;
     } else {
@@ -52,7 +51,7 @@ export class DropdownComponent implements OnInit {
 
   get selected(): string {
     return this.all && this.all.checked ? this.all.name :
-      this.list.filter(i => i.checked && i.visible).map(i => i.name).join(', ');
+      this.items.filter(i => i.checked && i.visible).map(i => i.name).join(', ');
   }
 
   get isEmpty(): boolean {
@@ -60,16 +59,16 @@ export class DropdownComponent implements OnInit {
   }
 
   get checked(): number {
-    return this.list.filter(i => i.checked).length;
+    return this.items.filter(i => i.checked).length;
   }
 
   ngOnInit(): void {
-    this.list.map(item => {
+    this.items.map(item => {
       item.uuid = item.uuid || v4();
       item.checked = item.checked || false;
       item.visible = item.visible || true;
     });
-    this.filterList = [...this.list];
+    this.filterList = [...this.items];
 
     if (!this.filterList.length) {
       this.all.visible = false;
@@ -82,15 +81,15 @@ export class DropdownComponent implements OnInit {
 
   onChange($event: any, item: Item): void {
     const checked = $event.target.checked;
-    const index = this.list.findIndex(i => i.id === item.id);
+    const index = this.items.findIndex(i => i.id === item.id);
 
-    if (item.id === 0) {
+    if (item.id === null) {
       this.all.checked = checked;
-      for (const iterator of this.list) {
+      for (const iterator of this.items) {
         iterator.checked = checked;
       }
     } else {
-      this.list[index].checked = checked;
+      this.items[index].checked = checked;
 
       /* istanbul ignore else*/
       if (this.all) {
@@ -98,11 +97,12 @@ export class DropdownComponent implements OnInit {
         if (this.all.checked) {
           this.all.checked = false;
         }
-        const allChecked = this.list.filter(i => i.id !== 0).every(i => i.checked);
+        const allChecked = this.items.filter(i => i.id !== null).every(i => i.checked);
         this.all.checked = allChecked;
       }
     }
 
     this.itemChange.emit(item);
   }
+
 }

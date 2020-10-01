@@ -4,12 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DropdownComponent } from './dropdown/dropdown.component';
+import { MultiSelectComponent } from './components/multi-select/multi-select.component';
+import { SingleSelectComponent } from './components/single-select/single-select.component';
+import { MultiDropdownComponent } from './shared/multi-dropdown/multi-dropdown.component';
+import { DropdownComponent } from './shared/dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DropdownComponent
+    DropdownComponent,
+    MultiSelectComponent,
+    SingleSelectComponent,
+    MultiDropdownComponent
   ],
   imports: [
     BrowserModule,

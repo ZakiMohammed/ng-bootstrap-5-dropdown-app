@@ -1,54 +1,46 @@
+<!-- header -->
+<nav class="navbar navbar-expand-md navbar-dark bg-warning">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="['/multi-select']">
+      <img src="https://codeomelet.com/Styles/imgs/logo/logo-sm.png" alt="CodeOmelet">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a class="nav-link text-white" [routerLink]="['/kitchen']"><b>Kitchen</b></a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/single-select']" [routerLinkActive]="'active'">Single Select</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/multi-select']" [routerLinkActive]="'active'">Multi-Select</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- main-content -->
 <div class="container my-5">
-  <div class="row">
-    <div class="col">
-      <h3 class="mb-4">Multi Select Dropdown using Bootstrap 5</h3>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6">
-      <h6>
-        Foods
-        <span class="float-right">
-          <button class="btn btn-sm btn-link" (click)="onToggleSearch($event)">Toggle Search</button>
-          <button class="btn btn-sm btn-link" (click)="onToggleError($event)">Toggle Error</button>
-          <button class="btn btn-sm btn-link" (click)="onToggleAll($event)">Toggle All</button>
-          <button class="btn btn-sm btn-link" (click)="onToggleStatus($event)">Toggle Status</button>
-        </span>
-      </h6>
-      <app-dropdown 
-        [list]="items" 
-        [showSearch]="showSearch"
-        [showAll]="showAll"
-        [showStatus]="showStatus"
-        [showError]="showError"
-        placeholder="Select Foods" 
-        (itemChange)="onItemChange($event)">
-      </app-dropdown>
-    </div>
-    <div class="col-sm-6">
-      <h4 class="border-bottom pb-2 mb-3">From Parent</h4>
-
-      <h6>On Click Event</h6>
-      <div class="card mb-2">
-        <div class="card-body">
-          <pre class="mb-0"><code>{{ currentSelectedItem | json }}</code></pre>
-        </div>
-      </div>
-
-      <h6>Checked Items <span class="badge bg-secondary">{{ checkedItems.length }}</span></h6>
-      <div class="card mb-2">
-        <div class="card-body">
-          <pre class="mb-0" style="max-height: 180px"><code>{{ checkedItems | json }}</code></pre>
-        </div>
-      </div>
-
-      <h6>Items <span class="badge bg-secondary">{{ items.length }}</span></h6>
-      <div class="card">
-        <div class="card-body">
-          <pre class="mb-0" style="max-height: 180px"><code>{{ items | json }}</code></pre>
-        </div>
-      </div>
-
-    </div>
-  </div>
+  <router-outlet></router-outlet>
 </div>
+
+<!-- footer -->
+<footer class="my-5">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="border-top pt-4 text-center">
+          <img class="img-fluid" src="https://codeomelet.com/Styles/imgs/logo/logo-invert-sm.png" alt="CodeOmelet">
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

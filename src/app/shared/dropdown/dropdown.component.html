@@ -1,0 +1,42 @@
+<div class="dropdown">
+    <button class="btn btn-block text-left dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false" data-display="static" [title]="item?.name || ''" [ngClass]="{ 'text-transparent': !item && !placeholder, 'border border-danger': showError }">
+        <span>
+            {{item ? item.name : (placeholder ? placeholder : 'Empty placeholder')}}
+        </span>
+    </button>
+    <div class="dropdown-menu">
+
+        <!-- search -->
+        <div *ngIf="showSearch" class="dropdown-item dropdown-item-search" onclick="event.stopPropagation();">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search" [(ngModel)]="search">
+                <div class="input-group-append">
+                    <span class="input-group-text h-100">
+                        <img src="/assets/icons/search.svg" alt=""title="Bootstrap">
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- items -->
+        <div class="dropdown-items">
+            <ng-container *ngFor="let item of filterList; let i = index; trackBy: trackByUuid">
+                <div class="dropdown-item" *ngIf="item.visible" (click)='onChange($event, item)'>
+                    {{item.name}}
+                </div>
+            </ng-container>
+        </div>
+
+        <!-- not found -->
+        <div class="dropdown-item" *ngIf="isEmpty">
+            No item found 🍽
+        </div>
+
+        <!-- count -->
+        <div *ngIf="showStatus"  class="dropdown-count text-dark">
+            <span><b>Count:</b> {{items.length}}</span>
+            <span *ngIf="search"><b>Search Count:</b> {{filterList.length}}</span>
+        </div>
+    </div>
+</div>
