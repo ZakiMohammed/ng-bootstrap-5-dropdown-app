@@ -1,44 +1,51 @@
 <!-- header -->
 <nav class="navbar navbar-expand-md navbar-dark bg-warning">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="https://codeomelet.com/" target="_blank">
-      <img src="https://codeomelet.com/Styles/imgs/logo/logo-sm.png" alt="CodeOmelet">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="https://codeomelet.com/" target="_blank">
+            <img src="https://codeomelet.com/Styles/imgs/logo/logo-sm.png" alt="CodeOmelet">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav ml-auto mb-2 mb-md-0">
-        <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/home']" [routerLinkActive]="'active'">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/single-select']" [routerLinkActive]="'active'">Single Select</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/multi-select']" [routerLinkActive]="'active'">Multi-Select</a>
-        </li>
-      </ul>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <strong class="nav-link active text-uppercase">Laboratory</strong>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/home']" [routerLinkActive]="'active'">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/single-select']" [routerLinkActive]="'active'">Single
+                        Select</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/multi-select']" [routerLinkActive]="'active'">Multi-Select</a>
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>
 
 <!-- main-content -->
 <div class="container my-5">
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 </div>
 
 <!-- footer -->
 <footer class="my-5">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <div class="border-top pt-4 text-center">
-          <a href="https://codeomelet.com" target="_blank"><img class="img-fluid" src="https://codeomelet.com/Styles/imgs/logo/logo-invert-sm.png" alt="CodeOmelet"></a>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="border-top pt-4 text-center">
+                    <a href="https://codeomelet.com" target="_blank"><img class="img-fluid"
+                            src="https://codeomelet.com/Styles/imgs/logo/logo-invert-sm.png" alt="CodeOmelet"></a>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </footer>
