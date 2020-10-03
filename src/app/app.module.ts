@@ -11,20 +11,20 @@ import { DropdownComponent } from './shared/dropdown/dropdown.component';
 import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DropdownComponent,
-    MultiSelectComponent,
-    SingleSelectComponent,
-    MultiDropdownComponent,
-    HomeComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        DropdownComponent,
+        MultiSelectComponent,
+        SingleSelectComponent,
+        MultiDropdownComponent,
+        HomeComponent
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        AppRoutingModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

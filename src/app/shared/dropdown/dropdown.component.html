@@ -1,8 +1,9 @@
 <div class="dropdown">
     <button class="btn btn-block text-left dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false" data-display="static" [title]="item?.name || ''" [ngClass]="{ 'text-transparent': !item && !placeholder, 'border border-danger': showError }">
+        aria-expanded="false" data-display="static" [title]="item?.name || ''"
+        [ngClass]="{ 'border border-danger': showError }">
         <span>
-            {{item ? item.name : (placeholder ? placeholder : 'Empty placeholder')}}
+            {{item ? item.name : (placeholder ? placeholder : 'Select')}}
         </span>
     </button>
     <div class="dropdown-menu">
@@ -13,7 +14,7 @@
                 <input type="text" class="form-control" placeholder="Search" [(ngModel)]="search">
                 <div class="input-group-append">
                     <span class="input-group-text h-100">
-                        <img src="/assets/icons/search.svg" alt=""title="Bootstrap">
+                        <img src="/assets/icons/search.svg" alt="" title="Bootstrap">
                     </span>
                 </div>
             </div>
@@ -21,7 +22,7 @@
 
         <!-- items -->
         <div class="dropdown-items">
-            <ng-container *ngFor="let item of filterList; let i = index; trackBy: trackByUuid">
+            <ng-container *ngFor="let item of filtered; let i = index; trackBy: trackById">
                 <div class="dropdown-item" *ngIf="item.visible" (click)='onChange(item)'>
                     {{item.name}}
                 </div>
@@ -33,10 +34,10 @@
             No item found 🍽
         </div>
 
-        <!-- count -->
-        <div *ngIf="showStatus"  class="dropdown-count text-dark">
+        <!-- status -->
+        <div *ngIf="showStatus" class="dropdown-count text-dark">
             <span><b>Count:</b> {{items.length}}</span>
-            <span *ngIf="search"><b>Search Count:</b> {{filterList.length}}</span>
+            <span *ngIf="search"><b>Search Count:</b> {{filtered.length}}</span>
         </div>
     </div>
 </div>

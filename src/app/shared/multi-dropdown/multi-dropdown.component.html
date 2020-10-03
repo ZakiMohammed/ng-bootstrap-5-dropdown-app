@@ -1,8 +1,9 @@
 <div class="dropdown">
     <button class="btn btn-block text-left dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false" data-display="static" [title]="selected" [ngClass]="{ 'text-transparent': !selected && !placeholder, 'border border-danger': showError }">
+        aria-expanded="false" data-display="static" [title]="selected"
+        [ngClass]="{ 'border border-danger': showError }">
         <span>
-            {{selected ? selected : (placeholder ? placeholder : 'Empty placeholder')}}
+            {{selected ? selected : (placeholder ? placeholder : 'Select')}}
         </span>
     </button>
     <div class="dropdown-menu">
@@ -13,7 +14,7 @@
                 <input type="text" class="form-control" placeholder="Search" [(ngModel)]="search">
                 <div class="input-group-append">
                     <span class="input-group-text h-100">
-                        <img src="/assets/icons/search.svg" alt=""title="Bootstrap">
+                        <img src="/assets/icons/search.svg" alt="" title="Bootstrap">
                     </span>
                 </div>
             </div>
@@ -23,7 +24,8 @@
         <div class="dropdown-item-checkboxes">
 
             <!-- all -->
-            <div class="dropdown-item" onclick="event.stopPropagation();" *ngIf="showAll && all.visible" [ngClass]="{ 'checked': all.checked }">
+            <div class="dropdown-item" onclick="event.stopPropagation();" *ngIf="showAll && all.visible"
+                [ngClass]="{ 'checked': all.checked }">
                 <!-- checkbox -->
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" [id]="'chkItem' + all.id"
@@ -34,8 +36,9 @@
                 </div>
             </div>
 
-            <ng-container *ngFor="let item of filterList; let i = index; trackBy: trackByUuid">
-                <div class="dropdown-item" onclick="event.stopPropagation();" *ngIf="item.visible" [ngClass]="{ 'checked': item.checked }">
+            <ng-container *ngFor="let item of filtered; let i = index; trackBy: trackByUuid">
+                <div class="dropdown-item" onclick="event.stopPropagation();" *ngIf="item.visible"
+                    [ngClass]="{ 'checked': item.checked }">
                     <!-- checkbox -->
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" [id]="'chkItem' + item.id"
@@ -53,11 +56,11 @@
             No item found 🍽
         </div>
 
-        <!-- count -->
-        <div *ngIf="showStatus"  class="dropdown-count text-dark">
+        <!-- status -->
+        <div *ngIf="showStatus" class="dropdown-count text-dark">
             <span><b>Count:</b> {{items.length}}</span>
             <span><b>Checked:</b> {{checked}}</span>
-            <span *ngIf="search"><b>Search Count:</b> {{filterList.length}}</span>
+            <span *ngIf="search"><b>Search Count:</b> {{filtered.length}}</span>
         </div>
     </div>
 </div>

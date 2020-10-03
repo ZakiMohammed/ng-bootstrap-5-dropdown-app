@@ -3,27 +3,27 @@ import { AppService } from 'src/app/app.service';
 import { Item } from 'src/app/shared/multi-dropdown/multi-dropdown.model';
 
 @Component({
-  selector: 'app-multi-select',
-  templateUrl: './multi-select.component.html',
-  styleUrls: ['./multi-select.component.scss']
+    selector: 'app-multi-select',
+    templateUrl: './multi-select.component.html',
+    styleUrls: ['./multi-select.component.scss']
 })
 export class MultiSelectComponent implements OnInit {
 
-  items: Item[] = [];
-  currentSelectedItem: Item = null;
-  showSearch = true;
-  showError = false;
-  showAll = true;
-  showStatus = true;
+    items: Item[] = [];
+    currentSelectedItem: Item = null;
+    showSearch = true;
+    showError = false;
+    showAll = true;
+    showStatus = true;
 
-  constructor(private appService: AppService) { }
+    constructor(private appService: AppService) { }
 
-  get checkedItems(): Item[] {
-    return this.items.filter(i => i.checked);
-  }
+    get checkedItems(): Item[] {
+        return this.items.filter(i => i.checked);
+    }
 
-  get dropdownText(): string {
-    return `<app-multi-dropdown
+    get dropdownText(): string {
+        return `<app-multi-dropdown
       [items]="items"
       [showSearch]="showSearch"
       [showAll]="showAll"
@@ -32,33 +32,33 @@ export class MultiSelectComponent implements OnInit {
       placeholder="Select Foods"
       (itemChange)="onItemChange($event)">
 </app-multi-dropdown>`;
-  }
+    }
 
-  ngOnInit(): void {
-    this.items = this.appService.getFoods().map(fruit => ({
-      id: fruit.id,
-      name: fruit.name
-    } as Item));
-  }
+    ngOnInit(): void {
+        this.items = this.appService.getFoods().map(fruit => ({
+            id: fruit.id,
+            name: fruit.name
+        } as Item));
+    }
 
-  onItemChange(item: Item): void {
-    this.currentSelectedItem = item;
-  }
+    onItemChange(item: Item): void {
+        this.currentSelectedItem = item;
+    }
 
-  onToggleSearch(): void {
-    this.showSearch = !this.showSearch;
-  }
+    onToggleSearch(): void {
+        this.showSearch = !this.showSearch;
+    }
 
-  onToggleError(): void {
-    this.showError = !this.showError;
-  }
+    onToggleError(): void {
+        this.showError = !this.showError;
+    }
 
-  onToggleAll(): void {
-    this.showAll = !this.showAll;
-  }
+    onToggleAll(): void {
+        this.showAll = !this.showAll;
+    }
 
-  onToggleStatus(): void {
-    this.showStatus = !this.showStatus;
-  }
+    onToggleStatus(): void {
+        this.showStatus = !this.showStatus;
+    }
 
 }
