@@ -2,8 +2,11 @@
 
 Check out the CodeOmelet blog post for this project.
 
+
 Exploring Bootstrap 5 with Angular - Creating Dropdown
+
 Link: https://codeomelet.com/posts/exploring-bootstrap-5-with-angular-creating-dropdown
 
 Creating Multi-Select Dropdown with Angular and Bootstrap 5
+
 https://codeomelet.com/posts/creating-multi-select-dropdown-with-angular-and-bootstrap-5
