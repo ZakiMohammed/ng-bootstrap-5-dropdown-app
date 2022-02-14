@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Item } from './multi-dropdown.model';
 import { v4 } from 'uuid';
 
@@ -7,15 +7,33 @@ import { v4 } from 'uuid';
     templateUrl: './multi-dropdown.component.html',
     styleUrls: ['./multi-dropdown.component.scss']
 })
-export class MultiDropdownComponent implements OnInit {
+export class MultiDropdownComponent {
 
-    @Input() items: Item[] = [];
+    _items: Item[] = [];
+
     @Input() placeholder: string;
     @Input() showSearch = true;
     @Input() showAll = true;
     @Input() showStatus = true;
     @Input() showError = false;
     @Output() itemChange = new EventEmitter<Item>(null);
+
+    @Input('items')
+    set items(items: Item[]) {
+        this._items = items;
+        this._items.map(item => {
+            item.uuid = item.uuid || v4();
+            item.checked = item.checked || false;
+            item.visible = item.visible || true;
+        });
+        this.filtered = [...this._items];
+
+        if (!this.filtered.length) {
+            this.all.visible = false;
+        } else {
+            this.all.visible = true;
+        }
+    }
 
     filtered: Item[] = [];
     all: Item = {
@@ -37,11 +55,11 @@ export class MultiDropdownComponent implements OnInit {
 
         const search = this.searchText.toLowerCase();
         if (!search) {
-            this.filtered = [...this.items];
+            this.filtered = [...this._items];
             this.all.visible = true;
             return;
         }
-        this.filtered = this.items.filter(i => i.name.toLowerCase().indexOf(search) !== -1);
+        this.filtered = this._items.filter(i => i.name.toLowerCase().indexOf(search) !== -1);
         if (this.all.name.toLowerCase().indexOf(search) !== -1) {
             this.all.visible = true;
         } else {
@@ -51,7 +69,7 @@ export class MultiDropdownComponent implements OnInit {
 
     get selected(): string {
         return this.all && this.all.checked ? this.all.name :
-            this.items.filter(i => i.checked && i.visible).map(i => i.name).join(', ');
+            this._items.filter(i => i.checked && i.visible).map(i => i.name).join(', ');
     }
 
     get isEmpty(): boolean {
@@ -59,20 +77,7 @@ export class MultiDropdownComponent implements OnInit {
     }
 
     get checked(): number {
-        return this.items.filter(i => i.checked).length;
-    }
-
-    ngOnInit(): void {
-        this.items.map(item => {
-            item.uuid = item.uuid || v4();
-            item.checked = item.checked || false;
-            item.visible = item.visible || true;
-        });
-        this.filtered = [...this.items];
-
-        if (!this.filtered.length) {
-            this.all.visible = false;
-        }
+        return this._items.filter(i => i.checked).length;
     }
 
     trackByUuid(index: number, item: Item): string {
@@ -81,15 +86,15 @@ export class MultiDropdownComponent implements OnInit {
 
     onChange($event: any, item: Item): void {
         const checked = $event.target.checked;
-        const index = this.items.findIndex(i => i.id === item.id);
+        const index = this._items.findIndex(i => i.id === item.id);
 
         if (item.id === null) {
             this.all.checked = checked;
-            for (const iterator of this.items) {
+            for (const iterator of this._items) {
                 iterator.checked = checked;
             }
         } else {
-            this.items[index].checked = checked;
+            this._items[index].checked = checked;
 
             /* istanbul ignore else*/
             if (this.all) {
@@ -97,7 +102,7 @@ export class MultiDropdownComponent implements OnInit {
                 if (this.all.checked) {
                     this.all.checked = false;
                 }
-                const allChecked = this.items.filter(i => i.id !== null).every(i => i.checked);
+                const allChecked = this._items.filter(i => i.id !== null).every(i => i.checked);
                 this.all.checked = allChecked;
             }
         }

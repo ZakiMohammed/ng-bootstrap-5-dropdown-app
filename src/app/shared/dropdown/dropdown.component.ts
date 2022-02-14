@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Item } from './dropdown.model';
 
 @Component({
@@ -7,14 +7,24 @@ import { Item } from './dropdown.model';
     styleUrls: ['./dropdown.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DropdownComponent implements OnInit {
+export class DropdownComponent {
 
-    @Input() items: Item[] = [];
+    _items: Item[] = [];
+
     @Input() placeholder: string;
     @Input() showSearch = true;
     @Input() showStatus = true;
     @Input() showError = false;
     @Output() itemChange = new EventEmitter<Item>(null);
+
+    @Input('items')
+    set items(items: Item[]) {
+        this._items = items;
+        this._items.map(item => {
+            item.visible = item.visible || true;
+        });
+        this.filtered = [...this._items];
+    }
 
     filtered: Item[] = [];
     item: Item = null;
@@ -30,21 +40,14 @@ export class DropdownComponent implements OnInit {
 
         const search = this.searchText.toLowerCase();
         if (!search) {
-            this.filtered = [...this.items];
+            this.filtered = [...this._items];
             return;
         }
-        this.filtered = this.items.filter(i => i.name.toLowerCase().indexOf(search) !== -1);
+        this.filtered = this._items.filter(i => i.name.toLowerCase().indexOf(search) !== -1);
     }
 
     get isEmpty(): boolean {
         return this.filtered.filter(i => i.visible).length === 0;
-    }
-
-    ngOnInit(): void {
-        this.items.map(item => {
-            item.visible = item.visible || true;
-        });
-        this.filtered = [...this.items];
     }
 
     trackById(item: Item): number {

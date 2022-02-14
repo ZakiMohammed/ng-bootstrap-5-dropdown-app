@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col">
+        <h3 class="border-bottom pb-3 mb-4">Single-Select (Async) Dropdown</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <h6>
+            Foods
+            <span class="float-right">
+                <button class="btn btn-sm btn-link py-0" (click)="onToggleSearch()">Toggle Search</button>
+                <button class="btn btn-sm btn-link py-0" (click)="onToggleError()">Toggle Error</button>
+                <button class="btn btn-sm btn-link py-0" (click)="onToggleStatus()">Toggle Status</button>
+            </span>
+        </h6>
+        <app-dropdown 
+            [items]="items" 
+            [showSearch]="showSearch" 
+            [showStatus]="showStatus" 
+            [showError]="showError" 
+            (itemChange)="onItemChange($event)">
+        </app-dropdown>
+
+        <div class="mt-3">
+            <p>Following HTML shows the initialization of single-select dropdown:</p>
+            <div class="card bg-light">
+                <div class="card-body">
+                    <pre><code>{{dropdownText}}</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <h6>On Change Event</h6>
+        <div class="card mb-2 bg-light">
+            <div class="card-body">
+                <pre class="mb-0"><code>{{ currentSelectedItem | json }}</code></pre>
+            </div>
+        </div>
+
+        <h6>Items <span class="badge bg-secondary">{{ items.length }}</span></h6>
+        <div class="card bg-light">
+            <div class="card-body">
+                <pre class="mb-0" style="max-height: 180px"><code>{{ items | json }}</code></pre>
+            </div>
+        </div>
+
+    </div>
+</div>

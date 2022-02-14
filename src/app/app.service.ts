@@ -1,10 +1,21 @@
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { Food } from './app.model';
+import { Item } from './shared/multi-dropdown/multi-dropdown.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AppService {
+
+    private url: string = environment.apiUrl + 'todos';
+
+    constructor(private http: HttpClient) {
+    }
+
     getFoods(): Food[] {
         return [
             {
@@ -389,4 +400,14 @@ export class AppService {
             }
         ];
     }
+
+    getFoodsAsync() {
+        const url = this.url;
+        return this.http.get(url).pipe(map((response: any) => {
+            return response.map((i: any) => ({
+                id: i.id,
+                name: i.title
+            } as Item)) as Item[]
+        }));
+      }
 }
