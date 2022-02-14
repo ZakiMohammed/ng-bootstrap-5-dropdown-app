@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://jsonplaceholder.typicode.com/',
+  apiUrl: 'https://jsonplaceholder.typicode.com/',
 };
